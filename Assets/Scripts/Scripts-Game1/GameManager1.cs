@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private int emptyLocation;
     private int size = 3;
     private bool shuffling = false;
+    public bool puzzleActive = true;
+
 
     void Start()
     {
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
             {
                 Transform piece = Instantiate(piecePrefab, gameTransform);
                 pieces.Add(piece);
+
+                piece.gameObject.layer = LayerMask.NameToLayer("Puzzle");
 
                 piece.localPosition = new Vector3(
                     -1 + (2 * width * col) + width,
