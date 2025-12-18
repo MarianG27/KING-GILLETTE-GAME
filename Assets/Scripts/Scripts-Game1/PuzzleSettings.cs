@@ -1,18 +1,24 @@
 using UnityEngine;
 
-public class PuzzleSettings : MonoBehaviour
+public class PanelController : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
+    public GameObject shadowPanel;
+    public GameObject mainPanel;
 
-    // APELAT de butonul OPEN
-    public void OpenPanel()
+    void Start()
     {
-        panel.SetActive(true);
+        ClosePanel();
     }
 
-    // APELAT de butonul CLOSE (X)
+    public void OpenPanel()
+    {
+        shadowPanel.SetActive(true);
+        mainPanel.SetActive(true);
+    }
+
     public void ClosePanel()
     {
-        panel.SetActive(false);
+        shadowPanel.SetActive(false);
+        mainPanel.SetActive(false);
     }
 }
