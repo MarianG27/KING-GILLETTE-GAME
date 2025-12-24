@@ -185,7 +185,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Skillicon5_22_0: 1928470703810488105
+      Skillicon5_22_1: 3172477448072567704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -3,16 +3,17 @@ using UnityEngine;
 public class PuzzleSettings : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameManager gameManager;
 
-    // APELAT de butonul OPEN
     public void OpenPanel()
     {
         panel.SetActive(true);
+        gameManager.PausePuzzle();
     }
 
-    // APELAT de butonul CLOSE (X)
     public void ClosePanel()
     {
         panel.SetActive(false);
+        gameManager.ResumePuzzle();
     }
 }
