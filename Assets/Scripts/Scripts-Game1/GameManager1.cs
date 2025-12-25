@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused)
+            return;
+
         // ⛔ dacă puzzle-ul e blocat (panel deschis)
         if (puzzleBlocked)
             return;
