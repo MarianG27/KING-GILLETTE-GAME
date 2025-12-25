@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+[System.Serializable]
+public class PuzzleLevelData
 {
-    [Header("Puzzle")]
+    public string levelName;
+    public Transform piecePrefab;
+    [Range(2, 6)] public int size = 3;
+}
+
+public class GameManager1 : MonoBehaviour
+{
+    [Header("Puzzle Board")]
     [SerializeField] private Transform gameTransform;
-    [SerializeField] private Transform piecePrefab;
+
+    [Header("Levels Data")]
+    [SerializeField] private PuzzleLevelData[] levels;
+    [SerializeField] private int currentLevelIndex = 0;
 
     [Header("UI")]
     public TMP_Text timerText;
@@ -17,7 +28,7 @@ public class GameManager : MonoBehaviour
     public TMP_InputField sizeInputTMP;
     public InputField sizeInputLegacy;
 
-
+    private Transform piecePrefab;
     private List<Transform> pieces;
     private int emptyLocation;
     private int size = 3;
@@ -31,9 +42,11 @@ public class GameManager : MonoBehaviour
     // ===== BLOCK INPUT =====
     public bool puzzleBlocked = false;
 
+    public int CurrentLevel => currentLevelIndex;
+
     void Start()
     {
-        CreateNewPuzzle(size);
+        LoadLevel(currentLevelIndex);
         UpdateTimerText();
     }
 
@@ -42,26 +55,25 @@ public class GameManager : MonoBehaviour
         if (PauseManager.Instance != null && PauseManager.Instance.IsPaused)
             return;
 
-        // ⛔ dacă puzzle-ul e blocat (panel deschis)
         if (puzzleBlocked)
             return;
 
-        // ⏱️ update timer
+        // ⏱ TIMER
         if (timerRunning && !puzzleFinished)
         {
             timer += Time.deltaTime;
             UpdateTimerText();
         }
 
-        // ✅ verificare final
+        // ✅ WIN CHECK
         if (!shuffling && !puzzleFinished && CheckCompletion())
         {
             puzzleFinished = true;
-            timerRunning = false; // ⛔ STOP TIMER
-            Debug.Log("Puzzle terminat în " + timer + " secunde");
+            timerRunning = false;
+            Debug.Log($"Puzzle terminat în {timer:F2} secunde");
         }
 
-        // 🖱️ click pe piese
+        // 🖱 INPUT
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(
@@ -80,17 +92,34 @@ public class GameManager : MonoBehaviour
                             SwapIfValid(i, -1, 0) ||
                             SwapIfValid(i, +1, size - 1);
 
-                        // ▶️ PORNEȘTE TIMER LA PRIMA MUTARE
+                        // ▶ START TIMER LA PRIMA MUTARE
                         if (moved && !timerRunning && !puzzleFinished)
-                        {
                             timerRunning = true;
-                        }
 
                         break;
                     }
                 }
             }
         }
+    }
+
+    // ================= LEVEL LOADING =================
+
+    public void LoadLevel(int index)
+    {
+        if (levels == null || levels.Length == 0)
+        {
+            Debug.LogError("NU ai setat levels în GameManager!");
+            return;
+        }
+
+        index = Mathf.Clamp(index, 0, levels.Length - 1);
+        currentLevelIndex = index;
+
+        piecePrefab = levels[index].piecePrefab;
+        size = levels[index].size;
+
+        CreateNewPuzzle(size);
     }
 
     // ================= PUZZLE =================
@@ -176,10 +205,8 @@ public class GameManager : MonoBehaviour
     private bool CheckCompletion()
     {
         for (int i = 0; i < pieces.Count; i++)
-        {
-            if (pieces[i].name != $"{i}")
-                return false;
-        }
+            if (pieces[i].name != $"{i}") return false;
+
         return true;
     }
 
@@ -211,11 +238,10 @@ public class GameManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer % 60f);
-
         timerText.text = $"{minutes:00}:{seconds:00}";
     }
 
-    // ================= PAUSE FROM PANEL =================
+    // ================= PAUSE =================
 
     public void PausePuzzle()
     {
@@ -229,6 +255,9 @@ public class GameManager : MonoBehaviour
         if (!puzzleFinished)
             timerRunning = true;
     }
+
+    // ================= SIZE INPUT =================
+
     public void SetSizeFromInput()
     {
         string input = "";
@@ -240,11 +269,8 @@ public class GameManager : MonoBehaviour
 
         if (int.TryParse(input, out int newSize))
         {
-            newSize = Mathf.Clamp(newSize, 2, 5);
-
-            // RESET TOTAL
+            newSize = Mathf.Clamp(newSize, 2, 6);
             CreateNewPuzzle(newSize);
         }
     }
-
 }

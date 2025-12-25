@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private GameObject optionsPanel;
 
+
     public bool IsPaused { get; private set; }
 
     void Awake()
