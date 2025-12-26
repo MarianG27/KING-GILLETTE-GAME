@@ -70,8 +70,16 @@ public class GameManager1 : MonoBehaviour
         {
             puzzleFinished = true;
             timerRunning = false;
-            Debug.Log($"Puzzle terminat în {timer:F2} secunde");
+            puzzleBlocked = true;
+
+            if (WinPanelManager.Instance != null)
+
+                if (AudioManager.Instance != null)
+                    AudioManager.Instance.PlayWin();
+
+            WinPanelManager.Instance.ShowWin(timer);
         }
+
 
         // 🖱 INPUT
         if (Input.GetMouseButtonDown(0))
@@ -91,6 +99,9 @@ public class GameManager1 : MonoBehaviour
                             SwapIfValid(i, +size, size) ||
                             SwapIfValid(i, -1, 0) ||
                             SwapIfValid(i, +1, size - 1);
+
+                        if (moved && AudioManager.Instance != null)
+                            AudioManager.Instance.PlayMove();
 
                         // ▶ START TIMER LA PRIMA MUTARE
                         if (moved && !timerRunning && !puzzleFinished)
