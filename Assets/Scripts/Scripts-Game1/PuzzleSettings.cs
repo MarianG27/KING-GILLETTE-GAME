@@ -3,7 +3,7 @@ using UnityEngine;
 public class PuzzleSettings : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
-    [SerializeField] private GameManager1 gameManager;
+    [SerializeField] private GameManager gameManager;
 
     public void OpenPanel()
     {

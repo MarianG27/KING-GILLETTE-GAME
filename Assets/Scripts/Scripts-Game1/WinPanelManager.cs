@@ -15,10 +15,15 @@ public class WinPanelManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
         else
+        {
             Destroy(gameObject);
+            return;
+        }
 
         winPanel.SetActive(false);
+        Time.timeScale = 1f; // ⭐ FOARTE IMPORTANT
     }
+
 
     // === APELAT CÂND PUZZLE-UL E TERMINAT ===
     public void ShowWin(float time)
@@ -37,10 +42,9 @@ public class WinPanelManager : MonoBehaviour
 
         int starCount = 0;
 
-        if (time < 30f) starCount = 3;
-        else if (time < 60f) starCount = 2;
-        else if (time < 400f) starCount = 1;
-        else starCount = 0;
+        if (time < 90f) starCount = 3;
+        else if (time < 120f) starCount = 2;
+        else starCount = 1;
 
         for (int i = 0; i < starCount; i++)
             stars[i].SetActive(true);
