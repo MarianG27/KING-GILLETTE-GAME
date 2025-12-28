@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource source;
 
+    private bool muted = false;
+    private float volume = 1f;
+
     void Awake()
     {
         if (Instance == null)
@@ -25,20 +28,43 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         source = GetComponent<AudioSource>();
+        source.volume = volume;
+    }
+
+    // 🎚️ SLIDER
+    public void SetVolume(float value)
+    {
+        volume = value;
+        if (!muted)
+            source.volume = value;
+    }
+
+    // 🔇 MUTE BUTTON
+    public void ToggleMute()
+    {
+        muted = !muted;
+
+        if (muted)
+            source.volume = 0f;
+        else
+            source.volume = volume;
     }
 
     public void PlayMove()
     {
-        source.PlayOneShot(movePiece);
+        if (!muted)
+            source.PlayOneShot(movePiece);
     }
 
     public void PlayWin()
     {
-        source.PlayOneShot(win);
+        if (!muted)
+            source.PlayOneShot(win);
     }
 
     public void PlayButton()
     {
-        source.PlayOneShot(buttonClick);
+        if (!muted)
+            source.PlayOneShot(buttonClick);
     }
 }
