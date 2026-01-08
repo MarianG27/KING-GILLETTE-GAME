@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: d87b8ed634d9b934b9fb5a2abb078e3f
+guid: dbaf57e049d9a6c4bb2b4fc8c0b61bca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5324332178164757689
-    second: Biker_jump_0
+      213: -4682421474997173924
+    second: Biker_hurt_0
   - first:
-      213: -6484491725660388134
-    second: Biker_jump_1
-  - first:
-      213: -2781512258587096569
-    second: Biker_jump_2
-  - first:
-      213: 3339079065039225643
-    second: Biker_jump_3
+      213: 8908475915502258604
+    second: Biker_hurt_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Biker_jump_0
+      name: Biker_hurt_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 3
         y: 0
-        width: 31
-        height: 34
+        width: 21
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,64 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74bce4ee71c2c16b0800000000000000
-      internalID: -5324332178164757689
+      spriteID: c51022e1a72b40fb0800000000000000
+      internalID: -4682421474997173924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Biker_jump_1
+      name: Biker_hurt_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 3
-        width: 28
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ad48d0fb1257206a0800000000000000
-      internalID: -6484491725660388134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_jump_2
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 1
-        width: 28
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 70a858086551669d0800000000000000
-      internalID: -2781512258587096569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_jump_3
-      rect:
-        serializedVersion: 2
-        x: 145
+        x: 48
         y: 0
-        width: 29
-        height: 33
+        width: 24
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b234b9ce7bac65e20800000000000000
-      internalID: 3339079065039225643
+      spriteID: ca982a165a341ab70800000000000000
+      internalID: 8908475915502258604
       vertices: []
       indices: 
       edges: []
@@ -235,7 +185,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Biker_hurt_0: -4682421474997173924
+      Biker_hurt_1: 8908475915502258604
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

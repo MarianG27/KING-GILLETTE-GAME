@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 512fe02f187045145a081231c29b27b0
+guid: 3d73cc8ff0373a547b909dc7ab4b7e64
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1433592913949782917
-    second: Biker_attack1_0
+      213: -8701182790922431664
+    second: Biker_climb_0
   - first:
-      213: -8995829330569661845
-    second: Biker_attack1_1
+      213: 7345877184069942695
+    second: Biker_climb_1
   - first:
-      213: -3928865515775029468
-    second: Biker_attack1_2
+      213: -7104999448802304209
+    second: Biker_climb_2
   - first:
-      213: -4728686509127561182
-    second: Biker_attack1_3
+      213: 3929433647224090560
+    second: Biker_climb_3
   - first:
-      213: -677108187393558969
-    second: Biker_attack1_4
+      213: 6563505405140196883
+    second: Biker_climb_4
   - first:
-      213: 570206224373181645
-    second: Biker_attack1_5
+      213: 5913250796675010091
+    second: Biker_climb_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Biker_attack1_0
+      name: Biker_climb_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 2
         y: 0
-        width: 21
-        height: 35
+        width: 25
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7c818b17dada1ce0800000000000000
-      internalID: -1433592913949782917
+      spriteID: 053935d3a503f3780800000000000000
+      internalID: -8701182790922431664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Biker_attack1_1
+      name: Biker_climb_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 50
         y: 0
         width: 24
-        height: 35
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +178,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b62fa53c2e4682380800000000000000
-      internalID: -8995829330569661845
+      spriteID: 7adb228f06cc1f560800000000000000
+      internalID: 7345877184069942695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Biker_attack1_2
+      name: Biker_climb_2
       rect:
         serializedVersion: 2
-        x: 95
+        x: 97
+        y: 0
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2fdacc25a8f56d90800000000000000
+      internalID: -7104999448802304209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biker_climb_3
+      rect:
+        serializedVersion: 2
+        x: 146
         y: 0
         width: 25
-        height: 35
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +222,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42f82f121add979c0800000000000000
-      internalID: -3928865515775029468
+      spriteID: 0cf62474517288630800000000000000
+      internalID: 3929433647224090560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Biker_attack1_3
+      name: Biker_climb_4
       rect:
         serializedVersion: 2
-        x: 149
+        x: 195
         y: 0
-        width: 19
-        height: 35
+        width: 24
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22015417ca4506eb0800000000000000
-      internalID: -4728686509127561182
+      spriteID: 31edcba1461461b50800000000000000
+      internalID: 6563505405140196883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Biker_attack1_4
+      name: Biker_climb_5
       rect:
         serializedVersion: 2
-        x: 197
+        x: 242
         y: 0
-        width: 25
-        height: 35
+        width: 26
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,30 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 746f5e7e0bd6a96f0800000000000000
-      internalID: -677108187393558969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Biker_attack1_5
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 0
-        width: 19
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dccea7c3a87c9e700800000000000000
-      internalID: 570206224373181645
+      spriteID: b2e0c931546101250800000000000000
+      internalID: 5913250796675010091
       vertices: []
       indices: 
       edges: []
@@ -285,7 +285,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Biker_climb_0: -8701182790922431664
+      Biker_climb_1: 7345877184069942695
+      Biker_climb_2: -7104999448802304209
+      Biker_climb_3: 3929433647224090560
+      Biker_climb_4: 6563505405140196883
+      Biker_climb_5: 5913250796675010091
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

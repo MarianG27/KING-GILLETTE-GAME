@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - ShadowPanel
+  - Ground
   layers:
   - Default
   - TransparentFX
