@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
         {
             Jump();
             isGround = false;
+            animator.SetBool("Jump", true);
         }
 
         if (Mathf.Abs(movement) > .1f)
@@ -46,6 +47,10 @@ public class Player : MonoBehaviour
         else if (movement < .1f)
         {
             animator.SetFloat("Run", 0f);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
         }
     }
     private void FixedUpdate()
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGround = true;
+            animator.SetBool("Jump", false);
         }
     }
 }
