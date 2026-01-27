@@ -11,9 +11,18 @@ public class game : MonoBehaviour
     public TMP_Text itemsText;
     public TMP_Text timeText;
 
-    public GameObject[] lives; // ❤️ asseturile din scenă (puse de TINE)
+    public GameObject[] lives;
 
     int currentLives;
+
+    // 🔊 AUDIO FX
+    public AudioSource sfxSource;
+    public AudioClip loseLifeSound;
+    public AudioClip goodItemSound;
+    public AudioClip bombSound;
+
+    // 🎵 BG MUSIC
+    public AudioSource bgMusic;
 
     void Awake()
     {
@@ -26,14 +35,19 @@ public class game : MonoBehaviour
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
-            timeText.text = "Time: " + Mathf.Ceil(timeLeft);
+
+            int minutes = Mathf.FloorToInt(timeLeft / 60f);
+            int seconds = Mathf.FloorToInt(timeLeft % 60f);
+
+            timeText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         }
     }
 
     public void AddItem()
     {
         items++;
-        itemsText.text = "Items: " + items;
+        itemsText.text = "pts: " + items;
+        sfxSource.PlayOneShot(goodItemSound);
     }
 
     public void LoseLife()
@@ -41,12 +55,25 @@ public class game : MonoBehaviour
         if (currentLives <= 0) return;
 
         currentLives--;
-        lives[currentLives].SetActive(false); // ❌ dispare o inimă
+        lives[currentLives].SetActive(false);
+
+        sfxSource.PlayOneShot(loseLifeSound);
 
         if (currentLives == 0)
         {
-            Debug.Log("GAME OVER");
-            Time.timeScale = 0f;
+            GameOver();
         }
+    }
+
+    public void HitBomb()
+    {
+        sfxSource.PlayOneShot(bombSound);
+    }
+
+    void GameOver()
+    {
+        Debug.Log("GAME OVER");
+        bgMusic.Stop();      // ⛔ oprește muzica
+        Time.timeScale = 0f;
     }
 }

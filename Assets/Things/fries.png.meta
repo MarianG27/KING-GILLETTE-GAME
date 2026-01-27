@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 783350970796e0948b4bf6a2cc1d64bb
+guid: 24ba3a1956470b7429cf766f310d641d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -205270267638800340
-    second: heart_0
+      213: 8090622000860335674
+    second: fries_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: heart_0
+      name: fries_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 17
-        height: 15
+        x: 8
+        y: 7
+        width: 48
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c20a07677cbb62df0800000000000000
-      internalID: -205270267638800340
+      spriteID: a3e8d3508d9a74070800000000000000
+      internalID: 8090622000860335674
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      heart_0: -205270267638800340
+      fries_0: 8090622000860335674
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
@@ -20,10 +20,12 @@ public class Bomb : MonoBehaviour
     {
         if (collision.gameObject.name == "basket")
         {
+            game.instance.HitBomb();
             game.instance.LoseLife();
             Destroy(gameObject);
         }
     }
+
 
 
 }

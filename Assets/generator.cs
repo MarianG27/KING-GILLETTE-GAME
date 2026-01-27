@@ -18,7 +18,7 @@ public class generator : MonoBehaviour
             int chance = Random.Range(1, 101);
 
             // 💣 20% șansă bombă
-            if (chance <= 10)
+            if (chance <= 40)
             {
                 Instantiate(gm[0], new Vector3(posX, spawnY, 0), Quaternion.identity);
             }
