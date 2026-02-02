@@ -15,14 +15,11 @@ public class game : MonoBehaviour
 
     int currentLives;
 
-    // 🔊 AUDIO FX
-    public AudioSource sfxSource;
-    public AudioClip loseLifeSound;
-    public AudioClip goodItemSound;
-    public AudioClip bombSound;
+    [Header("Stele WIN")]
+    public int score3Stars = 30; // puncte pentru 3 stele
+    public int score2Stars = 20; // puncte pentru 2 stele
 
-    // 🎵 BG MUSIC
-    public AudioSource bgMusic;
+    bool gameEnded = false;
 
     void Awake()
     {
@@ -32,6 +29,8 @@ public class game : MonoBehaviour
 
     void Update()
     {
+        if (gameEnded) return;
+
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
@@ -40,40 +39,68 @@ public class game : MonoBehaviour
             int seconds = Mathf.FloorToInt(timeLeft % 60f);
 
             timeText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+            // WIN instant dacă atingi scor maxim
+            if (items >= score3Stars)
+                WinGame();
+        }
+        else
+        {
+            // timp expirat
+            WinGame();
         }
     }
 
     public void AddItem()
     {
+        if (gameEnded) return;
+
         items++;
         itemsText.text = "pts: " + items;
-        sfxSource.PlayOneShot(goodItemSound);
+
+        // WIN instant dacă atingi scor maxim
+        if (items >= score3Stars)
+            WinGame();
     }
 
     public void LoseLife()
     {
+        if (gameEnded) return;
         if (currentLives <= 0) return;
 
         currentLives--;
-        lives[currentLives].SetActive(false);
-
-        sfxSource.PlayOneShot(loseLifeSound);
+        if (currentLives >= 0 && currentLives < lives.Length)
+            lives[currentLives].SetActive(false);
 
         if (currentLives == 0)
         {
-            GameOver();
+            // apel WinPanel chiar dacă toate inimile s-au pierdut
+            WinGame();
         }
     }
 
-    public void HitBomb()
-    {
-        sfxSource.PlayOneShot(bombSound);
-    }
 
     void GameOver()
     {
         Debug.Log("GAME OVER");
-        bgMusic.Stop();      // ⛔ oprește muzica
         Time.timeScale = 0f;
     }
+
+    void WinGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        Debug.Log("WIN! Scor: " + items);
+
+        // Redă sunetul de win
+        AudioMngGame2.instance.PlayWin();
+
+        // Afișează Win Panel și stelele
+        WinGame2.Instance.ShowWin();
+
+        Time.timeScale = 0f;
+    }
+
+
 }

@@ -20,6 +20,7 @@ public class ReadyToEat : MonoBehaviour
     {
         if (collision.gameObject.name == "basket")
         {
+            AudioMngGame2.instance.PlayGoodItem();
             game.instance.AddItem();
             Destroy(this.gameObject);
         }

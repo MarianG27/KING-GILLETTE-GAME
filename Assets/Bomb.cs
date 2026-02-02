@@ -20,12 +20,11 @@ public class Bomb : MonoBehaviour
     {
         if (collision.gameObject.name == "basket")
         {
-            game.instance.HitBomb();
+            AudioMngGame2.instance.PlayBadItem();
             game.instance.LoseLife();
             Destroy(gameObject);
         }
     }
-
 
 
 }
