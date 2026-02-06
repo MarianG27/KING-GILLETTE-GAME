@@ -14,7 +14,19 @@ public class AudioMngGame2 : MonoBehaviour
     public AudioClip Background;
     public AudioClip Click;
     public AudioClip Win;
+    public AudioClip Flip;
+    public AudioClip Match;
 
+
+    public void PlayFlip()
+    {
+        SFXSource.PlayOneShot(Flip);
+    }
+
+    public void PlayMatch()
+    {
+        SFXSource.PlayOneShot(Match);
+    }
     void Awake()
     {
         if (instance != null)

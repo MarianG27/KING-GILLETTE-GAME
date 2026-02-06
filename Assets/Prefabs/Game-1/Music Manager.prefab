@@ -49,7 +49,7 @@ MonoBehaviour:
   playlist:
   - {fileID: 8300000, guid: b05c0d4c0178326429dc21310fd5bbbf, type: 3}
   - {fileID: 8300000, guid: e4750598b92fe8c4e93f283c739ca660, type: 3}
-  scenesAllowed: 5
+  scenesAllowed: 1
 --- !u!82 &8199464160637082790
 AudioSource:
   m_ObjectHideFlags: 0
