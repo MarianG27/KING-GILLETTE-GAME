@@ -6,8 +6,71 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5ddfdfb56d514b1419a7c17af58e6d36
+  - enabled: 1
+    path: Assets/Scenes/video mc 1.unity
+    guid: 1f96b20f31f6456419482d5a9ccbd07a
+  - enabled: 1
+    path: Assets/Scenes/Level1 mc.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/video mc 2.unity
+    guid: 582e5748b9f85b6419e484d1cb61041b
+  - enabled: 1
+    path: Assets/Scenes/Level2 mc.unity
+    guid: c27009b598c1074429362bf8abb12c8d
+  - enabled: 1
+    path: Assets/Scenes/video mc 3.unity
+    guid: 193f273c92e8a21499c678b80dfd9985
+  - enabled: 1
+    path: Assets/Scenes/Level3 mc.unity
+    guid: ee526af1280ece945b586ea49b8882e5
+  - enabled: 1
+    path: Assets/Scenes/video mc 4.unity
+    guid: 1f928a420b0f94843a050c6d5ad5130a
+  - enabled: 1
+    path: Assets/Scenes/video tesla 1.unity
+    guid: a1daad60143a63e429df80d45bc78feb
+  - enabled: 1
+    path: Assets/Scenes/Level1 ts.unity
+    guid: 6e15a5221fb05ba4ab7f982b94c91e1e
+  - enabled: 1
+    path: Assets/Scenes/video tesla 2.unity
+    guid: dc4df3e35e6fbcc4ea225e2d72092d8c
+  - enabled: 1
+    path: Assets/Scenes/Level2 ts.unity
+    guid: c992fc13184583d4d908f2a2c3f237a2
+  - enabled: 1
+    path: Assets/Scenes/video tesla 3.unity
+    guid: dc460bdc786dffb41b858394a3ed1d6d
+  - enabled: 1
+    path: Assets/Scenes/Level3 ts.unity
+    guid: 9c7d4d0eed36f544e85da023c08560c5
+  - enabled: 1
+    path: Assets/Scenes/video tesla 4.unity
+    guid: e704e8a0996311f4f9e65c0b92279aa8
+  - enabled: 1
+    path: Assets/Scenes/video ikea 1.unity
+    guid: 9319f2e351e85fc4ebaecf210cdc3531
+  - enabled: 1
+    path: Assets/Scenes/Level1 Ikea.unity
+    guid: bd5c150c23d1574468f721559414b182
+  - enabled: 1
+    path: Assets/Scenes/video ikea 2.unity
+    guid: c7ea32c9d2b8a99439926f394876c607
+  - enabled: 1
+    path: Assets/Scenes/Level2 ikea.unity
+    guid: 2ec86014594cf87449bdd14f2cef5d79
+  - enabled: 1
+    path: Assets/Scenes/video ikea 3.unity
+    guid: a17237d5b4b2c414193a6c3c03112f88
+  - enabled: 1
+    path: Assets/Scenes/Level3 ikea.unity
+    guid: b2b6020384800d64eb56522ca50575ab
+  - enabled: 1
+    path: Assets/Scenes/video ikea 4.unity
+    guid: 356ff44bbe1d0c240b3489db6122e3e3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

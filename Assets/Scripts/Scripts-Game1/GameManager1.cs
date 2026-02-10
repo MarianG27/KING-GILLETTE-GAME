@@ -1,38 +1,122 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Pentru TMP
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Puzzle")]
     [SerializeField] private Transform gameTransform;
     [SerializeField] private Transform piecePrefab;
 
     [Header("UI")]
-    public InputField legacyInput; // InputField legacy
-    public TMP_InputField tmpInput; // TMP InputField
+    [SerializeField] private TMP_Text timerText;
 
-    private List<Transform> pieces;
+    [Header("Size Input")]
+    [SerializeField] private TMP_InputField sizeInputTMP;
+    [SerializeField] private InputField sizeInputLegacy;
+
+    private List<Transform> pieces = new List<Transform>();
     private int emptyLocation;
     private int size = 3;
-    private bool shuffling = false;
-    public bool puzzleActive = true;
+    private bool shuffling;
 
+    // ===== TIMER =====
+    private float timer;
+    private bool timerRunning;
+    private bool puzzleFinished;
+
+    // ===== BLOCK INPUT (panels) =====
+    public bool puzzleBlocked;
 
     void Start()
     {
         CreateNewPuzzle(size);
+        UpdateTimerText();
     }
 
-    // ================= RESET PUZZLE =================
+    void Update()
+    {
+        // ⛔ PAUSE GLOBAL
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused)
+            return;
+
+        // ⛔ PANELS (options / settings)
+        if (puzzleBlocked)
+            return;
+
+        // ⏱️ TIMER
+        if (timerRunning && !puzzleFinished)
+        {
+            timer += Time.deltaTime;
+            UpdateTimerText();
+        }
+
+        // ✅ WIN CHECK
+        if (!shuffling && !puzzleFinished && CheckCompletion())
+        {
+            puzzleFinished = true;
+            timerRunning = false;
+            puzzleBlocked = true;
+
+            if (WinPanelManager.Instance != null)
+                WinPanelManager.Instance.ShowWin(timer);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayWin();
+
+        }
+
+
+
+        // 🖱️ INPUT
+        if (Input.GetMouseButtonDown(0))
+            HandleClick();
+    }
+
+    // ================= INPUT =================
+    private void HandleClick()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            Vector2.zero
+        );
+
+        if (!hit) return;
+
+        for (int i = 0; i < pieces.Count; i++)
+        {
+            if (pieces[i] != hit.transform) continue;
+
+            bool moved =
+                SwapIfValid(i, -size, size) ||
+                SwapIfValid(i, +size, size) ||
+                SwapIfValid(i, -1, 0) ||
+                SwapIfValid(i, +1, size - 1);
+
+            if (moved && AudioManager.Instance != null)
+                AudioManager.Instance.PlayMove();
+
+
+            // ▶️ PORNEȘTE TIMER LA PRIMA MUTARE
+            if (moved && !timerRunning && !puzzleFinished)
+                timerRunning = true;
+
+            break;
+        }
+    }
+
+    // ================= PUZZLE =================
     private void CreateNewPuzzle(int newSize)
     {
-        StopAllCoroutines();
         ClearBoard();
 
         size = newSize;
-        pieces = new List<Transform>();
+        pieces.Clear();
+
+        timer = 0f;
+        timerRunning = false;
+        puzzleFinished = false;
+        UpdateTimerText();
 
         CreateGamePieces(0.01f);
         Shuffle();
@@ -41,48 +125,43 @@ public class GameManager : MonoBehaviour
     private void ClearBoard()
     {
         foreach (Transform child in gameTransform)
-        {
             Destroy(child.gameObject);
-        }
     }
 
-    // ================= CREATE PIECES =================
-    private void CreateGamePieces(float gapThickness)
+    private void CreateGamePieces(float gap)
     {
         float width = 1f / size;
 
-        for (int row = 0; row < size; row++)
+        for (int r = 0; r < size; r++)
         {
-            for (int col = 0; col < size; col++)
+            for (int c = 0; c < size; c++)
             {
                 Transform piece = Instantiate(piecePrefab, gameTransform);
                 pieces.Add(piece);
 
-                piece.gameObject.layer = LayerMask.NameToLayer("Puzzle");
-
                 piece.localPosition = new Vector3(
-                    -1 + (2 * width * col) + width,
-                    +1 - (2 * width * row) - width,
-                    0);
+                    -1 + (2 * width * c) + width,
+                    +1 - (2 * width * r) - width,
+                    0f
+                );
 
-                piece.localScale = ((2 * width) - gapThickness) * Vector3.one;
-                piece.name = $"{(row * size) + col}";
+                piece.localScale = ((2 * width) - gap) * Vector3.one;
+                piece.name = $"{(r * size) + c}";
 
-                if (row == size - 1 && col == size - 1)
+                if (r == size - 1 && c == size - 1)
                 {
                     emptyLocation = (size * size) - 1;
                     piece.gameObject.SetActive(false);
                 }
                 else
                 {
-                    float gap = gapThickness / 2;
                     Mesh mesh = piece.GetComponent<MeshFilter>().mesh;
                     Vector2[] uv = new Vector2[4];
 
-                    uv[0] = new Vector2((width * col) + gap, 1 - ((width * (row + 1)) - gap));
-                    uv[1] = new Vector2((width * (col + 1)) - gap, 1 - ((width * (row + 1)) - gap));
-                    uv[2] = new Vector2((width * col) + gap, 1 - ((width * row) + gap));
-                    uv[3] = new Vector2((width * (col + 1)) - gap, 1 - ((width * row) + gap));
+                    uv[0] = new Vector2(width * c, 1 - width * (r + 1));
+                    uv[1] = new Vector2(width * (c + 1), 1 - width * (r + 1));
+                    uv[2] = new Vector2(width * c, 1 - width * r);
+                    uv[3] = new Vector2(width * (c + 1), 1 - width * r);
 
                     mesh.uv = uv;
                 }
@@ -90,41 +169,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ================= UPDATE =================
-    void Update()
-    {
-        if (!shuffling && CheckCompletion())
-        {
-            shuffling = true;
-            StartCoroutine(WaitShuffle(0.5f));
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(
-                Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                Vector2.zero);
-
-            if (hit)
-            {
-                for (int i = 0; i < pieces.Count; i++)
-                {
-                    if (pieces[i] == hit.transform)
-                    {
-                        if (SwapIfValid(i, -size, size)) break;
-                        if (SwapIfValid(i, +size, size)) break;
-                        if (SwapIfValid(i, -1, 0)) break;
-                        if (SwapIfValid(i, +1, size - 1)) break;
-                    }
-                }
-            }
-        }
-    }
-
-    // ================= LOGIC =================
     private bool SwapIfValid(int i, int offset, int colCheck)
     {
-        if (((i % size) != colCheck) && ((i + offset) == emptyLocation))
+        if ((i % size != colCheck) && (i + offset == emptyLocation))
         {
             (pieces[i], pieces[i + offset]) = (pieces[i + offset], pieces[i]);
             (pieces[i].localPosition, pieces[i + offset].localPosition) =
@@ -139,31 +186,19 @@ public class GameManager : MonoBehaviour
     private bool CheckCompletion()
     {
         for (int i = 0; i < pieces.Count; i++)
-        {
-            if (pieces[i].name != $"{i}")
+            if (pieces[i].name != i.ToString())
                 return false;
-        }
-        return true;
-    }
 
-    private IEnumerator WaitShuffle(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        Shuffle();
-        shuffling = false;
+        return true;
     }
 
     private void Shuffle()
     {
         int count = 0;
-        int last = -1;
 
         while (count < size * size * size)
         {
             int rnd = Random.Range(0, size * size);
-            if (rnd == last) continue;
-
-            last = emptyLocation;
 
             if (SwapIfValid(rnd, -size, size) ||
                 SwapIfValid(rnd, +size, size) ||
@@ -175,23 +210,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ================= INPUT =================
+    // ================= TIMER UI =================
+    private void UpdateTimerText()
+    {
+        int m = Mathf.FloorToInt(timer / 60);
+        int s = Mathf.FloorToInt(timer % 60);
+        timerText.text = $"{m:00}:{s:00}";
+    }
+
+    // ================= PANELS =================
+    public void PausePuzzle()
+    {
+        puzzleBlocked = true;
+        timerRunning = false;
+    }
+
+    public void ResumePuzzle()
+    {
+        puzzleBlocked = false;
+        if (!puzzleFinished)
+            timerRunning = true;
+    }
+
+    // ================= SIZE INPUT =================
     public void SetSizeFromInput()
     {
-        string inputText = "";
+        string input = "";
 
-        if (tmpInput != null && !string.IsNullOrEmpty(tmpInput.text))
-        {
-            inputText = tmpInput.text;
-        }
-        else if (legacyInput != null && !string.IsNullOrEmpty(legacyInput.text))
-        {
-            inputText = legacyInput.text;
-        }
+        if (sizeInputTMP && !string.IsNullOrEmpty(sizeInputTMP.text))
+            input = sizeInputTMP.text;
+        else if (sizeInputLegacy && !string.IsNullOrEmpty(sizeInputLegacy.text))
+            input = sizeInputLegacy.text;
 
-        if (int.TryParse(inputText, out int newSize))
+        if (int.TryParse(input, out int newSize))
         {
-            newSize = Mathf.Clamp(newSize, 2, 5); // limite sigure
+            newSize = Mathf.Clamp(newSize, 2, 6);
             CreateNewPuzzle(newSize);
         }
     }
