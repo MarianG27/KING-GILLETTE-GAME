@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ar-ikea-new-storage-containers-ar-ikea-4x3-0e70e7431da349a2b109f71092f95795_0: -5212306783203008254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
