@@ -310,7 +310,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Barrel_fire_0: 4151295540478148091
+      Barrel_fire_1: 2426209238082856658
+      Barrel_fire_2: 8181119787690675711
+      Barrel_fire_3: -3397510838560678879
+      Barrel_fire_4: -4423691288036084901
+      Barrel_fire_5: -4095637426391748371
+      Barrel_fire_6: -2179977521232565626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
