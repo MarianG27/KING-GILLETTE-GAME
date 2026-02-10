@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Traffic_cone4_0: 4438799638944893919
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
